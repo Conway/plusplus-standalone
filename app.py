@@ -58,7 +58,12 @@ def handle_message(event_data, req):
             channel=channel,
             blocks=generate_leaderboard()
         )
-        pass
+    elif "loserboard" in message and config.BOT_KEYWORD in message:
+        sc.api_call(
+            "chat.postMessage",
+            channel=channel,
+            blocks=generate_leaderboard(losers=True)
+        )
     else:
         print(message)
         return

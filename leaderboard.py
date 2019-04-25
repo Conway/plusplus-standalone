@@ -2,9 +2,15 @@ from models import Thing
 import json
 
 
-def generate_leaderboard():
-    users = Thing.query.filter_by(user=True).order_by(Thing.points.desc()).limit(10)
-    things = Thing.query.filter_by(user=False).order_by(Thing.points.desc()).limit(10)
+def generate_leaderboard(losers=False):
+    if losers:
+        users = Thing.query.filter_by(user=True).order_by(Thing.points.asc()).limit(10)
+        things = Thing.query.filter_by(user=False).order_by(Thing.points.asc()).limit(10)
+        header = "Here's the current loserboard:"
+    else:
+        users = Thing.query.filter_by(user=True).order_by(Thing.points.desc()).limit(10)
+        things = Thing.query.filter_by(user=False).order_by(Thing.points.desc()).limit(10)
+        header = "Here's the current leaderboardboard:"
     formatted_users = [f"<@{user.item.upper()}> ({user.points})" for user in users]
     formatted_things = [f"{thing.item} ({thing.points})" for thing in things]
     numbered_users = generate_numbered_list(formatted_users)
@@ -12,7 +18,7 @@ def generate_leaderboard():
     leaderboard_header = {"type": "section",
                           "text":
                               {"type": "mrkdwn",
-                               "text": "Here's the current leaderboard:"
+                               "text": header
                                }
                           }
     body = {
