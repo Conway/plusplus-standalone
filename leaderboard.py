@@ -1,4 +1,5 @@
 from models import Thing
+import json
 
 
 def generate_leaderboard():

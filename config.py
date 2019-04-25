@@ -5,3 +5,4 @@ NAME = "PlusPlusV2"
 BOT_KEYWORD = "plusplus".lower()
 SIGNING_SECRET = os.environ.get('SLACK_SIGNING_SECRET')
 SLACK_TOKEN = os.environ.get('SLACK_BOT_USER_OAUTH_ACCESS_TOKEN')
+DATABASE_URI = os.environ.get('DATABASE_URL')

@@ -12,7 +12,7 @@ operation_exp = re.compile(r"(<?@|#)(.+)(\+\+|\-\-|==)")
 
 # flask init
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///test.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URI
 
 # init slack event adaptor
 slack = SlackEventAdapter(config.SIGNING_SECRET, "/slack/events", app)
